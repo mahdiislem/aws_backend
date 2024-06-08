@@ -127,12 +127,28 @@
 					</excludes>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.sonarsource.scanner.maven</groupId>
-				<artifactId>sonar-maven-plugin</artifactId>
-				<version>3.7.0.1746</version>
-			</plugin>
-
+<plugin>
+  <groupId>org.jacoco</groupId>
+  <artifactId>jacoco-maven-plugin</artifactId>
+  <version>${jacoco.version}</version>
+  <executions>
+    <!-- This execution initializes the JaCoCo agent before the tests are run -->
+    <execution>
+      <id>jacoco-initialize</id>
+      <goals>
+        <goal>prepare-agent</goal>
+      </goals>
+    </execution>
+    <!-- This execution generates the JaCoCo report after the package phase -->
+    <execution>
+      <id>jacoco-site</id>
+      <goals>
+        <phase>package</phase>
+        <goal>report</goal>
+      </goals>
+    </execution>
+  </executions>
+</plugin>
 		</plugins>
 		<finalName> simleasingback </finalName>
 	</build>
